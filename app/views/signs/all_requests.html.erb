@@ -1,0 +1,11 @@
+<% @signatures.each do |sig| %>
+  <p>
+    <b>Title:</b> <%= sig.title %><br>
+    <b>Completed:</b> <%= sig.is_complete %><br>
+    <b>Requester:</b> <%= sig.requester_email_address %><br>
+    <% sig.signatures.each do |s| %>
+      <b>Signer:</b> <%= s.signer_name %><br>
+      <b>Signer email:</b> <%= s.signer_name %><br>
+    <% end %>
+  </p>
+<% end %>
