@@ -1,0 +1,3 @@
+class Embedded < ApplicationRecord
+
+end
