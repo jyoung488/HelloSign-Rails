@@ -1,8 +1,17 @@
 class SignsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def index
-    client = Sign.initiate_client
+
+    # @response = params
+    # event = @response["json"]
+    # object = JSON.parse(event, symbolize_names: true)
+    # p "***** EVENT TYPE"
+    # p event_type = object[:event][:event_type]
+
+    # client = Sign.initiate_client
   end
+
 
   def account
     client = Sign.initiate_client
@@ -11,7 +20,8 @@ class SignsController < ApplicationController
 
   def signature_request
     client = Sign.initiate_client
-    request = client.get_signature_request :signature_request_id => 'bb00fafdac12fd2dd61eca7be23a839f24302dd3'
+
+    request = client.get_signature_request :signature_request_id => params[:request_id]
     render json: request
   end
 
@@ -22,7 +32,7 @@ class SignsController < ApplicationController
 
   def send_request
     client = Sign.initiate_client
-    client.send_signature_request(
+    response = client.send_signature_request(
       :test_mode => 1,
       :title => 'Test Contract',
       :subject => 'Test Signature Request',
@@ -36,8 +46,10 @@ class SignsController < ApplicationController
         ],
       :file_url => 'http://hrcouncil.ca/docs/samplecontract.pdf'
     )
-    flash[:notice] = "Request sent"
-    redirect_to root_path
+
+    p "***********"
+    p data = JSON.parse(response.to_json, symbolize_names: true)
+    id = data[:raw_data][:signatures][0][:signature_id]
   end
 
   def template_request
@@ -71,7 +83,34 @@ class SignsController < ApplicationController
   def reminder
     client = Sign.initiate_client
     client.remind_signature_request :signature_request_id => params[:signature_id], :email_address => params[:email]
+
     redirect_to root_path
   end
+
+  def update_email
+    # client = Sign.initiate_client
+    # client.update_signature_request(
+    #     :signature_request_id => params[:signature_request_id],
+    #     :signature_id => params[:signature_id],
+    #     :email_address => params[:email]
+    #     )
+  end
+
+  def cancel
+    client = Sign.initiate_client
+    client.cancel_signature_request :signature_request_id => params[:request_id]
+
+    redirect_to root_path
+  end
+
+  def file
+    client = Sign.initiate_client
+    file_bin = client.signature_request_files :signature_request_id => params[:request_id], :get_url => true
+    File.open("files.zip", "wb") do |file|
+      file.write(file_bin)
+    end
+  end
+
+
 
 end

@@ -1,17 +1,22 @@
 <h1>Rails app test</h1>
+Hello API event received
 <div id="links">
+  <%= @response %>
   <ul>
     <li>
       <%= link_to 'Get Account', account_path %>
     </li>
     <li>
-      <%= link_to 'Specific Signature Request Info', signature_request_path %>
+      <%= form_tag("/signature-request", method: "get") do %>
+      <%= text_field_tag(:request_id, nil, :placeholder => 'Request ID') %>
+      <%= submit_tag("Signature Request Info") %>
+      <% end %>
     </li>
     <li>
       <%= link_to 'All Signature Requests', all_requests_path %>
     </li>
     <li>
-      <%= link_to 'Send Signature Request', send_request_path %>
+      <%= link_to 'Send Signature Request', send_request_path, method: "post" %>
     </li>
     <li>
       <%= link_to 'Send Request via Template', template_request_path %>
@@ -23,5 +28,27 @@
         <%= submit_tag("Send Reminder") %>
       <% end %>
     </li>
+    <li>
+      <%= form_tag("/update-email", method: "post") do %>
+        <%= text_field_tag(:signature_request_id, nil, :placeholder => 'Signature Request ID') %>
+        <%= text_field_tag(:signature_id, nil, :placeholder => 'Signature ID') %>
+        <%= text_field_tag(:new_email, nil, :placeholder => 'New Email') %>
+        <%= submit_tag("Update Email") %>
+      <% end %>
+    </li>
+    <li>
+      <%= form_tag("/cancel", method: "post") do %>
+        <%= text_field_tag(:request_id, nil, :placeholder => 'Request ID') %>
+        <%= submit_tag("Cancel Signature Request") %>
+      <% end %>
+    </li>
+    <li>
+      Review futher:
+      <%= form_tag("/file", method: "get") do %>
+        <%= text_field_tag(:request_id, nil, :placeholder => 'Request ID') %>
+        <%= submit_tag("Get File") %>
+      <% end %>
+    </li>
+
   </ul>
 </div>
