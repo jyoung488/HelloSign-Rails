@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :signs
-  resources :embeddeds
+
   root 'signs#index'
 
   post '/' => 'signs#index'
@@ -17,4 +17,7 @@ Rails.application.routes.draw do
   post 'cancel' => 'signs#cancel'
 
   get 'file' => 'signs#file'
+
+  get '/embeddeds' => 'embeddeds#index'
+  get '/embeddeds/template' => 'embeddeds#template'
 end
