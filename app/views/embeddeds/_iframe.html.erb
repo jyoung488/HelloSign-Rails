@@ -1,0 +1,21 @@
+<h1 id="event">
+  HelloSign Signature Request
+</h1>
+<script type="text/javascript">
+  var signUrl = "<%= sign_url %>";
+  var clientId = "<%= ENV['CLIENT_ID'] %>";
+
+  HelloSign.init(clientId);
+  HelloSign.open({
+    url: signUrl,
+    allowCancel: true,
+    uxVersion: 2,
+    skipDomainVerification: true,
+    debug: true,
+    messageListener: function(eventData){
+      if (eventData.event == 'signature_request_canceled') {
+        document.getElementById("event").innerHTML = "SIGNATURE CANCELLED"
+      }
+    }
+  })
+</script>
