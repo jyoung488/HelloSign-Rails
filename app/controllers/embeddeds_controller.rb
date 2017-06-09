@@ -26,4 +26,31 @@ class EmbeddedsController < ApplicationController
 
     @sign_url = url_response[:raw_data][:sign_url]
   end
+
+  def file_request(file)
+    client = Embedded.initiate_client
+    signature_event = client.create_embedded_signature_request(
+      test_mode: 1,
+      client_id: ENV['CLIENT_ID'],
+      subject: 'Embedded Signature Request with File',
+      message: 'Hey!',
+      signers: [
+        {
+          email_address: 'jen.young+1@hellosign.com',
+          name: 'Jen Test'
+        }
+      ],
+      files: file
+    )
+
+    response_object = JSON.parse(signature_event.to_json, symbolize_names: true)
+
+    signature_id = response_object[:raw_data][:signatures][0][:signature_id]
+
+    get_url = client.get_embedded_sign_url :signature_id => signature_id
+
+    url_response = JSON.parse(get_url.to_json, symbolize_names: true)
+
+    @sign_url = url_response[:raw_data][:sign_url]
+  end
 end
