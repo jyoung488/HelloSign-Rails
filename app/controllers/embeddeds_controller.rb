@@ -16,19 +16,13 @@ class EmbeddedsController < ApplicationController
       ]
     )
 
-    response_object = JSON.parse(signature_event.to_json, symbolize_names: true)
-
-    signature_id = response_object[:raw_data][:signatures][0][:signature_id]
-
-    get_url = client.get_embedded_sign_url :signature_id => signature_id
-
-    url_response = JSON.parse(get_url.to_json, symbolize_names: true)
-
-    @sign_url = url_response[:raw_data][:sign_url]
+    @sign_url = render_url(signature_event)
   end
 
-  def file_request(file)
+  def file_request
     client = Embedded.initiate_client
+    file = params[:file]
+
     signature_event = client.create_embedded_signature_request(
       test_mode: 1,
       client_id: ENV['CLIENT_ID'],
@@ -43,14 +37,62 @@ class EmbeddedsController < ApplicationController
       files: file
     )
 
-    response_object = JSON.parse(signature_event.to_json, symbolize_names: true)
+    @sign_url = render_url(signature_event)
+  end
 
+  def unclaimed_draft
+    client = Embedded.initiate_client
+    file = params[:file]
+
+    signature_event = client.create_embedded_unclaimed_draft(
+      test_mode: 1,
+      client_id: ENV['CLIENT_ID'],
+      type: 'request_signature',
+      subject: 'Embedded Unclaimed Draft',
+      requester_email_address: 'jen.young@hellosign.com',
+      files: file,
+      is_for_embedded_signing: 1
+    )
+
+    @sign_url = render_url(signature_event)
+  end
+
+  def unclaimed_draft_template
+    client = Embedded.initiate_client
+
+    signature_event = client.create_embedded_unclaimed_draft_with_template(
+      test_mode: 1,
+      client_id: ENV['CLIENT_ID'],
+      template_id: 'e918bf31ce40b1a66b593992a9ebfcfde2c72648',
+      requester_email_address: 'jen.young@hellosign.com',
+      signing_redirect_url: 'http://www.google.com',
+      requesting_redirect_url: 'http://www.google.com',
+      signers: [
+        {
+          email_address: 'jen.young+1@hellosign.com',
+          name: 'Jen Test',
+          role: 'Client'
+        }
+      ]
+    )
+
+    response = JSON.parse(signature_event.to_json, symbolize_names: true)
+    @sign_url = response[:raw_data][:claim_url]
+
+    # @sign_url = render_url(signature_event)
+  end
+
+  private
+
+  def render_url(response)
+    client = Embedded.initiate_client
+
+    response_object = JSON.parse(response.to_json, symbolize_names: true)
     signature_id = response_object[:raw_data][:signatures][0][:signature_id]
 
     get_url = client.get_embedded_sign_url :signature_id => signature_id
 
     url_response = JSON.parse(get_url.to_json, symbolize_names: true)
-
-    @sign_url = url_response[:raw_data][:sign_url]
+    url_response[:raw_data][:sign_url]
   end
 end
