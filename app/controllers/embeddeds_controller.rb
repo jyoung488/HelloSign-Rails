@@ -21,7 +21,6 @@ class EmbeddedsController < ApplicationController
 
   def file_request
     client = Embedded.initiate_client
-    file = params[:file]
 
     signature_event = client.create_embedded_signature_request(
       test_mode: 1,
@@ -34,7 +33,7 @@ class EmbeddedsController < ApplicationController
           name: 'Jen Test'
         }
       ],
-      files: file
+      file_url: 'http://www.pdf995.com/samples/pdf.pdf',
     )
 
     @sign_url = render_url(signature_event)
