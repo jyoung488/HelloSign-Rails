@@ -42,7 +42,6 @@ class EmbeddedsController < ApplicationController
 
   def unclaimed_draft
     client = Embedded.initiate_client
-    file = params[:file]
 
     signature_event = client.create_embedded_unclaimed_draft(
       test_mode: 1,
@@ -50,7 +49,7 @@ class EmbeddedsController < ApplicationController
       type: 'request_signature',
       subject: 'Embedded Unclaimed Draft',
       requester_email_address: 'jen.young@hellosign.com',
-      files: file,
+      file_url: 'http://www.pdf995.com/samples/pdf.pdf',
       is_for_embedded_signing: 1
     )
 
