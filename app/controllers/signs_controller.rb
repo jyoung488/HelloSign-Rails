@@ -47,8 +47,7 @@ class SignsController < ApplicationController
       :file_url => 'http://hrcouncil.ca/docs/samplecontract.pdf'
     )
 
-    p "***********"
-    p data = JSON.parse(response.to_json, symbolize_names: true)
+    data = JSON.parse(response.to_json, symbolize_names: true)
     id = data[:raw_data][:signatures][0][:signature_id]
   end
 
