@@ -39,12 +39,41 @@ class SignsController < ApplicationController
       :message => 'This is a test from my Rails app',
       :signers => [
         {
-          :email_address => 'jyoung488@gmail.com',
+          :email_address => 'jen.young@hellosign.com',
           :name => 'Jen',
-          :order => 0,
+          :order => 0
         }
         ],
-      :file_url => 'http://hrcouncil.ca/docs/samplecontract.pdf'
+    #   :form_fields_per_document => [
+    #     [
+    #         {
+    #             "api_id": "uniqueIdHere_1",
+    #             "name": "",
+    #             "type": "text",
+    #             "x": 112,
+    #             "y": 328,
+    #             "width": 100,
+    #             "height": 16,
+    #             "required": true,
+    #             "signer": 1,
+    #             "page": 1,
+    #             "validation_type": "numbers_only"
+    #         },
+    #         {
+    #             "api_id": "uniqueIdHere_2",
+    #             "name": "",
+    #             "type": "signature",
+    #             "x": 530,
+    #             "y": 415,
+    #             "width": 120,
+    #             "height": 30,
+    #             "required": true,
+    #             "signer": 0,
+    #             "page": 1
+    #         }
+    #     ]
+    # ],
+      :file_url => 'http://www.pdf995.com/samples/pdf.pdf'
     )
 
     data = JSON.parse(response.to_json, symbolize_names: true)

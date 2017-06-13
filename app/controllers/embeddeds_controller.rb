@@ -78,8 +78,6 @@ class EmbeddedsController < ApplicationController
 
     response = JSON.parse(signature_event.to_json, symbolize_names: true)
     @sign_url = response[:raw_data][:claim_url]
-
-    # @sign_url = render_url(signature_event)
   end
 
   private
