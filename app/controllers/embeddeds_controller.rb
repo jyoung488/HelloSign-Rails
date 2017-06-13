@@ -80,6 +80,44 @@ class EmbeddedsController < ApplicationController
     @sign_url = response[:raw_data][:claim_url]
   end
 
+  def template_draft
+    client = Embedded.initiate_client
+    file = params[:file]
+
+    request = client.create_embedded_template_draft(
+      test_mode: 1,
+      client_id: ENV['CLIENT_ID'],
+      file_url: 'http://www.pdf995.com/samples/pdf.pdf',
+      title: 'Test title',
+      subject: 'test subject',
+      message: 'test message',
+      signer_roles: [
+        {
+          name: 'Client',
+          order: 0
+        },
+        {
+          name: 'Client 2',
+          order: 1
+        }
+      ],
+      merge_fields: '[
+        {
+          "name":"Test Merge",
+          "type":"text"
+        },
+        {
+          "name":"Test Merge 2",
+          "type":"text"
+        }]'
+    )
+
+    p request
+    p "*****"
+    p request.data['template_id']
+    @sign_url = request.data['edit_url']
+  end
+
   private
 
   def render_url(response)

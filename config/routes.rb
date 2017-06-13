@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   get '/embeddeds/file-request' => 'embeddeds#file_request'
   get '/embeddeds/unclaimed-draft' => 'embeddeds#unclaimed_draft'
   get '/embeddeds/unclaimed-draft-template' => 'embeddeds#unclaimed_draft_template'
+  get '/embeddeds/template-draft' => 'embeddeds#template_draft'
 end
