@@ -1,5 +1,5 @@
 class CallbacksController < ApplicationController
   def index
-    @response = response
+    @event = params["json"]
   end
 end
