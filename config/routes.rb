@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :signs
-  resources :callbacks
 
   root 'signs#index'
 
@@ -25,4 +24,6 @@ Rails.application.routes.draw do
   get '/embeddeds/unclaimed-draft' => 'embeddeds#unclaimed_draft'
   get '/embeddeds/unclaimed-draft-template' => 'embeddeds#unclaimed_draft_template'
   get '/embeddeds/template-draft' => 'embeddeds#template_draft'
+
+  post '/callbacks' => 'callbacks#index'
 end
