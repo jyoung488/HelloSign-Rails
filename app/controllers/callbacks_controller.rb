@@ -11,6 +11,8 @@ class CallbacksController < ApplicationController
     id = event[:signature_request][:signature_request_id]
 
     case event_type
+    when "callback_test"
+      p "Hello API event received"
     when "signature_request_sent"
       Sign.create(signature_request_id: id,
         status: 'Sent')
