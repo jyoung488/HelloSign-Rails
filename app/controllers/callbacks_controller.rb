@@ -8,10 +8,10 @@ class CallbacksController < ApplicationController
   def create
     event = JSON.parse(params["json"], symbolize_names: true)
     event_type = event[:event][:event_type]
+    return "Hello API event received" if event_type == "callback_test"
+
     id = event[:signature_request][:signature_request_id]
 
-    return "Hello API event received" if event_type == "callback_test"
-    
     case event_type
     when "signature_request_sent"
       Sign.create(signature_request_id: id,
