@@ -7,14 +7,22 @@ class CallbacksController < ApplicationController
 
   def create
     event = JSON.parse(params["json"], symbolize_names: true)
-    # event = @response["json"]
-    # object = JSON.parse(event, symbolize_names: true)
-    # p "***** EVENT TYPE"
-    # p event_type = object[:event][:event_type]
-
-    # client = Sign.initiate_client
-
     event_type = event[:event][:event_type]
+    id = event[:signature_request][:signature_request_id]
 
+    case event_type
+    when "signature_request_sent"
+      Sign.create(signature_request_id: id,
+        status: 'Sent')
+    when "signature_request_viewed"
+      Sign.find_by(signature_request_id: id,
+          status: 'Viewed')
+    when "signature_request_all_signed"
+      Sign.find_by(signature_request_id: id,
+        status: 'All signed')
+    when "signature_request_declined"
+      Sign.find_by(signature_request_id: id,
+        status: 'Declined')
+    end
   end
 end
