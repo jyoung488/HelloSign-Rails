@@ -27,7 +27,7 @@ class SignsController < ApplicationController
 
   def all_requests
     client = Sign.initiate_client
-    @signatures = client.get_signature_requests(page_size: 3)
+    @signatures = client.get_signature_requests
 
     render json: @signatures
   end

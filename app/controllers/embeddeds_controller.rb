@@ -36,6 +36,8 @@ class EmbeddedsController < ApplicationController
       file_url: 'http://www.pdf995.com/samples/pdf.pdf',
     )
 
+    p signature_event
+
     @sign_url = render_url(signature_event)
   end
 
@@ -61,7 +63,7 @@ class EmbeddedsController < ApplicationController
     signature_event = client.create_embedded_unclaimed_draft_with_template(
       test_mode: 1,
       client_id: ENV['CLIENT_ID'],
-      template_id: 'e918bf31ce40b1a66b593992a9ebfcfde2c72648',
+      template_id: '396695d8ef08b4c5a51f176057c6a7aa62ba50cc',
       requester_email_address: 'jen.young@hellosign.com',
       signing_redirect_url: 'http://www.google.com',
       requesting_redirect_url: 'http://www.google.com',
@@ -85,7 +87,7 @@ class EmbeddedsController < ApplicationController
     request = client.create_embedded_template_draft(
       test_mode: 1,
       client_id: ENV['CLIENT_ID'],
-      file_url: 'http://www.pdf995.com/samples/pdf.pdf',
+      file: 'lexicata-test.pdf',
       title: 'Test title',
       subject: 'test subject',
       message: 'test message',
