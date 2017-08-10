@@ -87,7 +87,7 @@ class EmbeddedsController < ApplicationController
     request = client.create_embedded_template_draft(
       test_mode: 1,
       client_id: ENV['CLIENT_ID'],
-      file: 'lexicata-test.pdf',
+      file_url: 'http://www.pdf995.com/samples/pdf.pdf',
       title: 'Test title',
       subject: 'test subject',
       message: 'test message',
