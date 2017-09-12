@@ -118,12 +118,12 @@ class SignsController < ApplicationController
   end
 
   def update_email
-    # client = Sign.initiate_client
-    # client.update_signature_request(
-    #     :signature_request_id => params[:signature_request_id],
-    #     :signature_id => params[:signature_id],
-    #     :email_address => params[:email]
-    #     )
+    client = Sign.initiate_client
+    client.update_signature_request(
+        :signature_request_id => '33e7a1d839e98797d633fb8b47247c4aa9a5936d',
+        :signature_id => '5064ca698bde9581ad75f6d62450eb4b',
+        :email_address => 'jen.young+1@hellosign.com'
+        )
   end
 
   def cancel
@@ -140,7 +140,5 @@ class SignsController < ApplicationController
       file.write(file_bin)
     end
   end
-
-
 
 end

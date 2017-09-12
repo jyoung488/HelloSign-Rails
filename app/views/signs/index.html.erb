@@ -19,6 +19,9 @@ Hello API event received
       <%= link_to 'Send Signature Request', send_request_path, method: "post" %>
     </li>
     <li>
+      <%= link_to 'Update Signature Request', update_email_path %>
+    </li>
+    <li>
       <%= link_to 'Send Request via Template', template_request_path %>
     </li>
     <li>
@@ -49,7 +52,9 @@ Hello API event received
         <%= submit_tag("Get File") %>
       <% end %>
     </li>
-
+    <li>
+      <%= link_to 'Update Template', templates_update_path %>
+    </li>
   </ul>
 </div>
 <div align="center">
