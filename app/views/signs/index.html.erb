@@ -56,6 +56,15 @@ Hello API event received
       <%= link_to 'Update Template', templates_update_path %>
     </li>
   </ul>
+  <h4>API Apps</h4>
+  <ul>
+    <li>
+      <%= form_tag("/apps/info", method: "get") do %>
+        <%= text_field_tag(:client_id, nil, :placeholder => 'Client ID') %>
+        <%= submit_tag("Get API App") %>
+      <% end %>
+    </li>
+  </ul>
 </div>
 <div align="center">
   <%= link_to 'Embedded Signatures', embeddeds_path %>

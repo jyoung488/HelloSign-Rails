@@ -32,4 +32,5 @@ Rails.application.routes.draw do
 
   get '/templates/update' => 'templates#update'
 
+  get '/apps/info' => 'apps#info'
 end
