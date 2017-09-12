@@ -18,7 +18,6 @@ class EmbeddedsController < ApplicationController
   end
 
   def edit_unclaimed_draft
-    client = Embedded.initiate_client
     @draft = client.edit_and_resend_unclaimed_draft(
       :signature_request_id => '596e1b9288c7c726c603fc3080689e6c89c1a397',
       :client_id => ENV['CLIENT_ID'],
