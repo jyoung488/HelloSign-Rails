@@ -41,7 +41,7 @@ class SignsController < ApplicationController
           :name => 'Jen',
           :order => 0
         }
-        ],
+      ],
     #   :form_fields_per_document => [
     #     [
     #         {

@@ -67,6 +67,25 @@ Hello API event received
     <li>
       <%= link_to 'List API Apps', apps_list_path %>
     </li>
+    <li>
+      <%= form_tag("/apps/create", method: "get") do %>
+        <%= text_field_tag(:app_name, nil, :placeholder => 'App Name') %>
+        <%= submit_tag("Create API App") %>
+      <% end %>
+    </li>
+    <li>
+      <%= form_tag("/apps/update", method: "get") do %>
+        <%= text_field_tag(:client_id, nil, :placeholder => 'Client ID') %>
+        <%= text_field_tag(:app_name, nil, :placeholder => 'App Name') %>
+        <%= submit_tag("Update API App") %>
+      <% end %>
+    </li>
+    <li>
+      <%= form_tag("/apps/delete", method: "get") do %>
+        <%= text_field_tag(:client_id, nil, :placeholder => 'Client ID') %>
+        <%= submit_tag("Delete API App") %>
+      <% end %>
+    </li>
   </ul>
 </div>
 <div align="center">

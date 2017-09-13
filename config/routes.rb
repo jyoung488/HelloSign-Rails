@@ -34,4 +34,7 @@ Rails.application.routes.draw do
 
   get '/apps/info' => 'apps#info'
   get '/apps/list' => 'apps#list'
+  get '/apps/create' => 'apps#create'
+  get '/apps/update' => 'apps#update'
+  get '/apps/delete' => 'apps#delete'
 end
