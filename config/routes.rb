@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'template-request' => 'signs#template_request'
 
   post 'reminder' => 'signs#reminder'
-  post 'update-email' => 'signs#update_email'
+  get 'update-email' => 'signs#update_email'
   post 'cancel' => 'signs#cancel'
 
   get 'file' => 'signs#file'
@@ -28,5 +28,13 @@ Rails.application.routes.draw do
   get '/embeddeds/unclaimed-draft' => 'embeddeds#unclaimed_draft'
   get '/embeddeds/unclaimed-draft-template' => 'embeddeds#unclaimed_draft_template'
   get '/embeddeds/template-draft' => 'embeddeds#template_draft'
+  get '/embeddedds/edit-unclaimed-draft' => 'embeddeds#edit_unclaimed_draft'
 
+  get '/templates/update' => 'templates#update'
+
+  get '/apps/info' => 'apps#info'
+  get '/apps/list' => 'apps#list'
+  get '/apps/create' => 'apps#create'
+  get '/apps/update' => 'apps#update'
+  get '/apps/delete' => 'apps#delete'
 end

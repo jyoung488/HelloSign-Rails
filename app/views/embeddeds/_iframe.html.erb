@@ -15,6 +15,9 @@
     messageListener: function(eventData){
       if (eventData.event == 'signature_request_canceled') {
         document.getElementById("event").innerHTML = "SIGNATURE CANCELLED"
+      } else if (eventData.event == 'signature_request_signed') {
+        HelloSign.close()
+        document.location = "http://www.reuters.com"
       }
     }
   })
