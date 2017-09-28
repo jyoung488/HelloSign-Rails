@@ -6,9 +6,11 @@ class HelloworksController < ApplicationController
   end
 
   def create
-    event = params.to_s
-    email = send_email(event)
-    p email.status_code
+    if params
+      event = params.to_s
+      email = send_email(event)
+      p email.status_code
+    end
   end
 
   private
