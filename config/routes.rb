@@ -37,4 +37,7 @@ Rails.application.routes.draw do
   get '/apps/create' => 'apps#create'
   get '/apps/update' => 'apps#update'
   get '/apps/delete' => 'apps#delete'
+
+  get '/helloworks' => 'helloworks#index'
+  post '/helloworks' => 'helloworks#send'
 end
