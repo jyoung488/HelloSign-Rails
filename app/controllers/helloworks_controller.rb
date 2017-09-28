@@ -1,10 +1,11 @@
 class HelloworksController < ApplicationController
+  skip_before_action :verify_authenticity_token
   include SendGrid
 
   def index
   end
 
-  def send
+  def create
     event = params.to_s
     email = send_email(event)
     p email.status_code

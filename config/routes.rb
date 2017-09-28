@@ -39,5 +39,5 @@ Rails.application.routes.draw do
   get '/apps/delete' => 'apps#delete'
 
   get '/helloworks' => 'helloworks#index'
-  post '/helloworks' => 'helloworks#send'
+  post '/helloworks' => 'helloworks#create'
 end
