@@ -42,7 +42,7 @@ class HelloworksController < ApplicationController
     token = data[:object][:value]
 
     request = HTTParty.post("https://api.helloworks.com/v2/view/3TUZEwHFAzDb2Uiy/instance", headers: { "Authorization" => "Bearer #{token}", "Content-Type" => "application/x-www-form-urlencoded" }, body: { "identity[type]" => "email", "identity[value]" => ENV["EMAIL"], "identity[verification]" => "code", "identity[full_name]" => "Jen Test"})
-    p request
+
     url = request["object"]["url"]
 
     redirect_to url
