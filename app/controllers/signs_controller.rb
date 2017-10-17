@@ -42,38 +42,24 @@ class SignsController < ApplicationController
           :order => 0
         }
       ],
-    #   :form_fields_per_document => [
-    #     [
-    #         {
-    #             "api_id": "uniqueIdHere_1",
-    #             "name": "",
-    #             "type": "text",
-    #             "x": 112,
-    #             "y": 328,
-    #             "width": 100,
-    #             "height": 16,
-    #             "required": true,
-    #             "signer": 1,
-    #             "page": 1,
-    #             "validation_type": "numbers_only"
-    #         },
-    #         {
-    #             "api_id": "uniqueIdHere_2",
-    #             "name": "",
-    #             "type": "signature",
-    #             "x": 530,
-    #             "y": 415,
-    #             "width": 120,
-    #             "height": 30,
-    #             "required": true,
-    #             "signer": 0,
-    #             "page": 1
-    #         }
-    #     ]
-    # ],
+      :form_fields_per_document => [
+        	[{
+        		"api_id": "test",
+        		"name": "hi",
+        		"type": "signature",
+        		"x": 0,
+        		"y": 52,
+        		"height": 30,
+        		"width": 20,
+        		"required": true,
+        		"signer": 0,
+        		"page": 1
+        	}]
+        ],
       :file_url => 'http://www.pdf995.com/samples/pdf.pdf'
     )
 
+    p response
     data = JSON.parse(response.to_json, symbolize_names: true)
     id = data[:raw_data][:signatures][0][:signature_id]
 

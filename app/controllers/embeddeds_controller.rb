@@ -1,14 +1,53 @@
 class EmbeddedsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  before_action :client
+
   def index
   end
 
   def template
+    request = client.create_embedded_signature_request_with_template(
+      :test_mode => 1,
+      :client_id => ENV['CLIENT_ID'],
+      :template_id => '60266b319ca6f27c1da5899369883d5e29408a76',
+      :message => 'Glad we could come to an agreement.',
+      :signers => [
+          {
+              :email_address => "george@example.com",
+              :name => "George",
+              :role => 'Dispensary Owner or Manager'
+          },
+          {
+              :email_address => "ceo@example.com",
+              :name => "CEO ROle",
+              :role => 'WoahStork CEO'
+          }
+      ],
+      :custom_fields => [
+
+      ]
+    )
+
+    signatures = request.signatures
+    p "*****"
+    p signatures[0].signature_id
+
+    url_request = client.get_embedded_sign_url :signature_id => signatures[0].signature_id
+
+    @sign_url = url_request.sign_url
   end
 
   def file_request
+
   end
 
   def unclaimed_draft
+    @request = client.create_unclaimed_draft(
+        :test_mode => 1,
+        :file => 'images/sales_contract.pdf'
+    )
+
+    p @request
   end
 
   def unclaimed_draft_template

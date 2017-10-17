@@ -91,3 +91,10 @@ Hello API event received
 <div align="center">
   <%= link_to 'Embedded Signatures', embeddeds_path %>
 </div>
+<div>
+  <h3>Helloworks</h3>
+  <%= form_tag("/helloworks", method: "post") do %>
+    <%= text_field_tag(:id, nil, :placeholder => 'ID') %>
+    <%= submit_tag("Helloworks Callback") %>
+  <% end %>
+</div>
