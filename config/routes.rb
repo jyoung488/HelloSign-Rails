@@ -40,4 +40,6 @@ Rails.application.routes.draw do
 
   get '/helloworks' => 'helloworks#index'
   post '/helloworks' => 'helloworks#create'
+  get '/helloworks/new' => 'helloworks#new_instance'
+  post '/helloworks/new' => 'helloworks#new_instance'
 end

@@ -37,7 +37,7 @@ class SignsController < ApplicationController
       :message => 'This is a test from my Rails app',
       :signers => [
         {
-          :email_address => 'jen.young@hellosign.com',
+          :email_address => ENV["EMAIL"],
           :name => 'Jen',
           :order => 0
         }
