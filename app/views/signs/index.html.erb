@@ -46,7 +46,7 @@ Hello API event received
       <% end %>
     </li>
     <li>
-      Review futher:
+      Download File:
       <%= form_tag("/file", method: "get") do %>
         <%= text_field_tag(:request_id, nil, :placeholder => 'Request ID') %>
         <%= submit_tag("Get File") %>
@@ -54,6 +54,9 @@ Hello API event received
     </li>
     <li>
       <%= link_to 'Update Template', templates_update_path %>
+    </li>
+    <li>
+      <%= link_to 'List Templates', templates_list_path %>
     </li>
   </ul>
   <h4>API Apps</h4>

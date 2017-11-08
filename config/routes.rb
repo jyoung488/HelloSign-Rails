@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get '/embeddedds/edit-unclaimed-draft' => 'embeddeds#edit_unclaimed_draft'
 
   get '/templates/update' => 'templates#update'
+  get '/templates/list' => 'templates#list'
 
   get '/apps/info' => 'apps#info'
   get '/apps/list' => 'apps#list'
