@@ -69,7 +69,7 @@ class SignsController < ApplicationController
   def template_request
     client.send_signature_request_with_template(
         :test_mode => 1,
-        :template_id => 'feb796545f869222c6bd67a6eb276a7573700704',
+        :template_id => '9b9ebeb503f956d06c240c2e29c1c376770b6f98',
         :subject => 'Offer Letter',
         :message => 'Glad we could come to an agreement.',
         :signers => [
@@ -85,9 +85,9 @@ class SignsController < ApplicationController
             }
         ],
         :custom_fields =>
-            {
+            [{
                 :Salary => '$10,000',
-            }
+            }]
     )
     flash[:notice] = "Request sent"
     redirect_to root_path
@@ -114,7 +114,8 @@ class SignsController < ApplicationController
   end
 
   def file
-    file_bin = client.signature_request_files :signature_request_id => params[:request_id], :get_url => true
+    file_bin = client.signature_request_files :signature_request_id => params[:request_id], :get_url => 1
+    
     File.open("files.zip", "wb") do |file|
       file.write(file_bin)
     end

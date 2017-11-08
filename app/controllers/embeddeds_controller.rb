@@ -6,6 +6,9 @@ class EmbeddedsController < ApplicationController
   end
 
   def template
+    email = "george@example.com"
+    name = "George",
+    role = "Dispensary Owner or Manager"
     request = client.create_embedded_signature_request_with_template(
       :test_mode => 1,
       :client_id => ENV['CLIENT_ID'],
@@ -13,8 +16,8 @@ class EmbeddedsController < ApplicationController
       :message => 'Glad we could come to an agreement.',
       :signers => [
           {
-              :email_address => "george@example.com",
-              :name => "George",
+              :email_address => "#{email}",
+              :name => "#{name}",
               :role => 'Dispensary Owner or Manager'
           },
           {
@@ -24,7 +27,6 @@ class EmbeddedsController < ApplicationController
           }
       ],
       :custom_fields => [
-
       ]
     )
 
