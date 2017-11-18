@@ -31,7 +31,7 @@ class HelloworksController < ApplicationController
     data = JSON.parse(response.to_json, symbolize_names: true)
     token = data[:object][:value]
 
-    request = HTTParty.post("https://api.helloworks.com/v2/view/JmzWs5OI4aFu91uJ/instance",
+    request = HTTParty.post("https://api.helloworks.com/v2/view/tKyC6RWS9TA1zqWo/instance",
       headers: {
       "Authorization" => "Bearer #{token}",
       "Content-Type" => "application/x-www-form-urlencoded"
@@ -39,10 +39,9 @@ class HelloworksController < ApplicationController
       body: {
         "identity[type]" => "email",
         "identity[value]" => ENV["EMAIL"],
-        "identity[verification]" => "code",
+        "identity[verification]" => "link",
         "identity[full_name]" => "HelloWorks Test",
-        "settings[callback_url]" => "https://289a7edf.ngrok.io/helloworks",
-        "merge_fields[iGt6iniWZ11XTOMx][fullName]" => "HelloWorks Test"
+        "settings[callback_url]" => "https://2d64d5c6.ngrok.io/helloworks"
         }
       )
 
