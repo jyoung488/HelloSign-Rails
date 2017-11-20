@@ -9,9 +9,12 @@ class HelloworksController < ApplicationController
     data = JSON.parse(response.to_json, symbolize_names: true)
     token = data[:object][:value]
 
+
     urls = []
 
     req = JSON.parse(request.raw_post, symbolize_names: true)
+
+    p req
     req[:forms].each do |form|
       urls << form[:document][:url]
     end
@@ -31,7 +34,7 @@ class HelloworksController < ApplicationController
     data = JSON.parse(response.to_json, symbolize_names: true)
     token = data[:object][:value]
 
-    request = HTTParty.post("https://api.helloworks.com/v2/view/tKyC6RWS9TA1zqWo/instance",
+    request = HTTParty.post("https://api.helloworks.com/v2/view/enk8LKHYcl7783Cv/instance",
       headers: {
       "Authorization" => "Bearer #{token}",
       "Content-Type" => "application/x-www-form-urlencoded"
@@ -39,9 +42,17 @@ class HelloworksController < ApplicationController
       body: {
         "identity[type]" => "email",
         "identity[value]" => ENV["EMAIL"],
-        "identity[verification]" => "link",
-        "identity[full_name]" => "HelloWorks Test",
-        "settings[callback_url]" => "https://2d64d5c6.ngrok.io/helloworks"
+        "identity[verification]" => "code",
+        "identity[full_name]" => "Jen Test",
+        "settings[callback_url]" => "https://fbc8ca2e.ngrok.io/helloworks",
+        "merge_fields[YqtuH153GDVVpqeR][firstName]" => "Jen",
+        "merge_fields[YqtuH153GDVVpqeR][middleInitial]" => "C",
+        "merge_fields[YqtuH153GDVVpqeR][lastName]" => "HelloWorks",
+        "merge_fields[YqtuH153GDVVpqeR][streetAddress]" => "301 Howard St.",
+        "merge_fields[YqtuH153GDVVpqeR][city]" => "San Francisco",
+        "merge_fields[YqtuH153GDVVpqeR][state]" => "CA",
+        "merge_fields[YqtuH153GDVVpqeR][zip]" => "94105",
+        "merge_fields[YqtuH153GDVVpqeR][ssn]" => "555555555"
         }
       )
 
