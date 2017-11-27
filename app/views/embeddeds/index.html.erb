@@ -1,5 +1,6 @@
-<h1>Welcome to Embedded Signing!</h1>
+<h1>HelloSign Embedded Workflows</h1>
 
+<h4>Embedded Signing</h4>
 <ul>
   <li>
     <%= link_to 'Sign with Template', embeddeds_template_path %>
@@ -7,12 +8,18 @@
   <li>
     <%= link_to 'Sign with File', embeddeds_file_request_path %>
   </li>
+</ul>
+<h4>Embedded Requesting</h4>
+<ul>
   <li>
     <%= link_to 'Unclaimed Draft Request with File', embeddeds_unclaimed_draft_path %>
   </li>
   <li>
     <%= link_to 'Unclaimed Draft Request with Template', embeddeds_unclaimed_draft_template_path %>
   </li>
+</ul>
+<h4>Embedded Templates</h4>
+<ul>
   <li>
     <%= link_to 'Template Draft', embeddeds_template_draft_path %>
   </li>
@@ -20,3 +27,6 @@
     <%= link_to 'Edit and Resend Unclaimed Draft', embeddedds_edit_unclaimed_draft_path %>
   </li>
 </ul>
+<p>
+  <%= link_to 'Home', root_path %>
+</p>
