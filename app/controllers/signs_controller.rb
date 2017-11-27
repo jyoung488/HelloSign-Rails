@@ -13,11 +13,6 @@ class SignsController < ApplicationController
     # client = Sign.initiate_client
   end
 
-
-  def account
-    @account = client.get_account
-  end
-
   def signature_request
     request = client.get_signature_request :signature_request_id => params[:request_id]
     render json: request
@@ -72,6 +67,7 @@ class SignsController < ApplicationController
         :template_id => '9b9ebeb503f956d06c240c2e29c1c376770b6f98',
         :subject => 'Offer Letter',
         :message => 'Glad we could come to an agreement.',
+        :file_url => 'http://www.pdf995.com/samples/pdf.pdf',
         :signers => [
             {
                 :email_address => 'jyoung488@gmail.com',
@@ -83,11 +79,7 @@ class SignsController < ApplicationController
                 :name => 'Jen Hiring Manager',
                 :role => 'Hiring Manager'
             }
-        ],
-        :custom_fields =>
-            [{
-                :Salary => '$10,000',
-            }]
+        ]
     )
     flash[:notice] = "Request sent"
     redirect_to root_path
@@ -115,7 +107,7 @@ class SignsController < ApplicationController
 
   def file
     file_bin = client.signature_request_files :signature_request_id => params[:request_id], :get_url => 1
-    
+
     File.open("files.zip", "wb") do |file|
       file.write(file_bin)
     end

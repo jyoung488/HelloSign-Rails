@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   get '/callbacks' => 'callbacks#index'
   post '/callbacks' => 'callbacks#create'
 
-  get 'account' => 'signs#account'
+  get 'account' => 'accounts#get_account'
+  post 'update-account' => 'accounts#update_account'
+  post 'verify-account' => 'accounts#verify_account'
+
   get 'signature-request' => 'signs#signature_request'
   get 'all-requests' => 'signs#all_requests'
   post 'send-request' => 'signs#send_request'
@@ -30,8 +33,18 @@ Rails.application.routes.draw do
   get '/embeddeds/template-draft' => 'embeddeds#template_draft'
   get '/embeddedds/edit-unclaimed-draft' => 'embeddeds#edit_unclaimed_draft'
 
+  get '/templates/info' => 'templates#get_template'
   get '/templates/update' => 'templates#update'
   get '/templates/list' => 'templates#list'
+  post '/templates/add-access' => 'templates#add_access'
+  post '/templates/remove-access' => 'templates#remove_access'
+  post '/templates/delete' => 'templates#delete'
+  get '/templates/download' => 'templates#download'
+
+  get '/teams' => 'teams#index'
+  post '/teams/new' => 'teams#new'
+  post '/teams/update' => 'teams#update'
+  post '/teams/add-user' => 'teams#add_user'
 
   get '/apps/info' => 'apps#info'
   get '/apps/list' => 'apps#list'

@@ -1,8 +1,35 @@
+/*
+
+color palette http://www.color-hex.com/color-palette/50361
+black: #292826
+dark blue: #043a62
+light blue: #90d9e5
+light grey: #e5ecea
+tan: #ad8961
+
+*/
+
 body {
   font-family: Verdana;
+  background-color: #292826;
+  color: #e5ecea;
 }
 
 h1 {
   text-align: center;
-  color: #A9A9A9;
+  color: #e5ecea;
+}
+
+a {
+  color: #90d9e5;
+  text-decoration: none;
+}
+
+#embedded {
+  background-color: #043a62;
+  color: #fff;
+}
+
+#embedded > a {
+  color: #fff;
 }
