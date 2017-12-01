@@ -8,10 +8,10 @@
   HelloSign.init(clientId);
   HelloSign.open({
     url: signUrl,
-    allowCancel: true,
-    uxVersion: 2,
-    skipDomainVerification: true,
     debug: true,
+    allowCancel: true,
+    skipDomainVerification: true,
+    uxVersion: 2,
     messageListener: function(eventData){
       if (eventData.event == 'signature_request_canceled') {
         document.getElementById("event").innerHTML = "SIGNATURE CANCELLED"
