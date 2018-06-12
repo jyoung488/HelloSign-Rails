@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'all-requests' => 'signs#all_requests'
   post 'send-request' => 'signs#send_request'
   get 'template-request' => 'signs#template_request'
+  get 'unclaimed-draft' => 'signs#unclaimed_draft'
 
   post 'reminder' => 'signs#reminder'
   get 'update-email' => 'signs#update_email'
@@ -56,4 +57,6 @@ Rails.application.routes.draw do
   post '/helloworks' => 'helloworks#create'
   get '/helloworks/new' => 'helloworks#new_instance'
   post '/helloworks/new' => 'helloworks#new_instance'
+
+  get '/helloworks/v3/new' => 'helloworks#v3_instance'
 end

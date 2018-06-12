@@ -69,6 +69,9 @@
         <%= submit_tag("Get File") %>
       <% end %>
     </li>
+    <li>
+      <%= link_to 'Create Unclaimed Draft', unclaimed_draft_path %>
+    </li>
   </ul>
   <h4>Templates</h4>
   <ul>
@@ -181,6 +184,9 @@
   <ul>
     <li>
       <%= link_to 'Create new HelloWorks Instance', helloworks_new_path, method: :post %>
+    </li>
+    <li>
+      <%= link_to 'v3 HelloWorks Instance', helloworks_v3_new_path %>
     </li>
   </ul>
 </div>

@@ -9,7 +9,7 @@ class CallbacksController < ApplicationController
     event = JSON.parse(params["json"], symbolize_names: true)
     p event
     event_type = event[:event][:event_type]
-    return "Hello API event received" if event_type == "callback_test"
+    # return "Hello API event received" if event_type == "callback_test"
     p "******"
     p "event type: #{event_type}"
 
@@ -18,15 +18,6 @@ class CallbacksController < ApplicationController
     elsif event_type.include? "template"
       id = event[:template][:template_id]
     end
-
-    # if !event[:signature_request][:signature_request_id].nil?
-    #   id = event[:signature_request][:signature_request_id]
-    # elsif !event[:template][:template_id].nil?
-    #   id = event[:template][:template_id]
-    # end
-
-    p "******"
-    p id
 
     case event_type
     when "signature_request_sent"
@@ -46,5 +37,7 @@ class CallbacksController < ApplicationController
     when "template_error"
       p "TEMPLATE ERROR"
     end
+
+    return "Hello API Event Received"
   end
 end
