@@ -9,15 +9,18 @@
   HelloSign.open({
     url: signUrl,
     debug: true,
-    allowCancel: true,
+    allowCancel: false,
     skipDomainVerification: true,
     uxVersion: 2,
     messageListener: function(eventData){
+      console.log("hi");
+      HelloSign.close()
       if (eventData.event == 'signature_request_canceled') {
         document.getElementById("event").innerHTML = "SIGNATURE CANCELLED"
       } else if (eventData.event == 'signature_request_signed') {
-        HelloSign.close()
-        document.location = "http://www.reuters.com"
+        console.log(eventData);
+      } else if (eventData.event == 'signature_request_declined') {
+        console.log(eventData);
       }
     }
   })

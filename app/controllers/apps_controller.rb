@@ -9,6 +9,7 @@ class AppsController < ApplicationController
 
   def list
     app_list = client.get_api_apps :page => 2
+    p app_list.headers
 
     render json: app_list
   end

@@ -6,14 +6,22 @@ class TemplatesController < ApplicationController
   end
 
   def update
-    @template = client.update_template_files :template_id =>'74cb63b17da0bc1541dbb6c4f6b2f10004ef0492', :file_url => 'http://che.org.il/wp-content/uploads/2016/12/pdf-sample.pdf', :message => 'updated using new endpoint!'
+    @template = client.update_template_files(
+      :template_id =>'1edd04e79d173f80d164444e0503e73621a60838',
+      :files => ['/Users/jenyoung/Documents/Testing/Rails-Test/app/assets/exampledoc.pdf'],
+      :message => 'updated using new endpoint!',
+      :client_id => "513c9bcded6de4e70ffca114573540d9"
+    )
+    p @template
   end
 
   def list
-    @templates = client.get_templates(
-      :page_size => 1,
-      :page => 1
-    )
+    list = client.get_templates
+
+    p list
+
+    @templates = list.first
+
 
     render json: @templates
   end

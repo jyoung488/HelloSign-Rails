@@ -12,25 +12,26 @@ class EmbeddedsController < ApplicationController
     request = client.create_embedded_signature_request_with_template(
       :test_mode => 1,
       :client_id => ENV['CLIENT_ID'],
-      :template_id => '60266b319ca6f27c1da5899369883d5e29408a76',
+      :template_id => '75483a9f0674c1b23fbc42ae8006a0b73fd36736',
       :file_url => 'http://www.pdf995.com/samples/pdf.pdf',
+      :allow_decline => 1,
       :message => 'Glad we could come to an agreement.',
-      :signers => [
+      signers: [
           {
-              :email_address => "#{email}",
-              :name => "#{name}",
-              :role => 'Dispensary Owner or Manager'
-          },
-          {
-              :email_address => "ceo@example.com",
-              :name => "CEO ROle",
-              :role => 'WoahStork CEO'
+              email_address: "#{email}",
+              name: "#{name}",
+              role: 'Client'
           }
       ],
+
       :custom_fields => [
+        {
+          name: "Address",
+          value: "123 Main St."
+        }
       ]
     )
-
+    p request
     signatures = request.signatures
 
     url_request = client.get_embedded_sign_url :signature_id => signatures[0].signature_id
@@ -42,15 +43,25 @@ class EmbeddedsController < ApplicationController
     request = client.create_embedded_signature_request(
       :test_mode => 1,
       :client_id => ENV['CLIENT_ID'],
-      :title => 'Rails Embedded Signature Request',
+      :subject => 'test subject',
+      :message => 'Rails Embedded Signature Request',
       :signers => [
         {
           :email_address => 'jyoung488@gmail.com',
           :name => 'Jen Rails'
         }
       ],
-      :file_url => 'http://www.pdf995.com/samples/pdf.pdf'
+      :use_text_tags => 1,
+      :hide_text_tags => 1,
+      :files => ['public/Text_Tags_Merge.pdf'],
+      :custom_fields => [
+        {"name": "address", "value": "PSYDUCK"}
+      ]
+      # :files => ['/Users/jenyoung/Documents/Testing/Rails-Test/app/assets/doc1.pdf', '/Users/jenyoung/Documents/Testing/Rails-Test/app/assets/doc2.pdf']
+      # :file_url => 'http://www.pdf995.com/samples/pdf.pdf'
     )
+
+    p request
 
     signatures = request.signatures
 
@@ -59,12 +70,41 @@ class EmbeddedsController < ApplicationController
   end
 
   def unclaimed_draft
-    request = client.create_unclaimed_draft(
+    request = client.create_embedded_unclaimed_draft(
         :test_mode => 1,
-        :file_url => 'http://www.pdf995.com/samples/pdf.pdf'
+        # :file_url => 'http://www.pdf995.com/samples/pdf.pdf',
+        :client_id => ENV['CLIENT_ID'],
+        :requester_email_address => ENV['EMAIL'],
+        :type => "request_signature",
+        :signers => [
+          {
+            :email_address => ENV["EMAIL"],
+            :name => 'Jen',
+            :order => 0
+          }
+        ],
+        :files => ['public/Text_Tags_Merge.pdf'],
+        :custom_fields => [
+          {"name": "address", "value": "PSYDUCK"}
+        ],
+        :use_text_tags => 1
+        # :form_fields_per_document => [
+          #   [{
+          #     "api_id": "test",
+          #     "name": "hi",
+          #     "type": "signature",
+          #     "x": 0,
+          #     "y": 52,
+          #     "height": 30,
+          #     "width": 20,
+          #     "required": true,
+          #     "signer": 0,
+          #     "page": 1
+          #   }]
+          # ]
     )
 
-    # @sign_url = request.claim_url
+    @sign_url = request.claim_url
   end
 
   def unclaimed_draft_template
@@ -72,21 +112,21 @@ class EmbeddedsController < ApplicationController
       :test_mode => 1,
       :client_id => ENV['CLIENT_ID'],
       :requester_email_address => ENV['EMAIL'],
-      :template_id => '60266b319ca6f27c1da5899369883d5e29408a76',
-      :file_url => 'http://www.pdf995.com/samples/pdf.pdf',
+      :template_id => '1159636818bce0549c40d3477a937da0abb1b92a',
       :message => 'Glad we could come to an agreement.',
       :signers => [
           {
               :email_address => "jyoung488@gmail.com",
               :name => "Jen Test",
-              :role => 'Dispensary Owner or Manager'
-          },
-          {
-              :email_address => "ceo@example.com",
-              :name => "CEO ROle",
-              :role => 'WoahStork CEO'
+              :role => "Client"
           }
-      ]
+      ],
+      # :custom_fields => [
+      #   {
+      #     :name => "Name",
+      #     :value => "SDK TEST"
+      #   }
+      # ]
     )
 
     @sign_url = request.claim_url
@@ -120,7 +160,8 @@ class EmbeddedsController < ApplicationController
       :test_mode => true
     )
     p "***"
-    @sign_url = draft.claim_url
+
+    @sign_url = @draft.claim_url
   end
 
 end
