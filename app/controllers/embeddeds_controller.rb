@@ -35,7 +35,8 @@ class EmbeddedsController < ApplicationController
     signatures = request.signatures
 
     url_request = client.get_embedded_sign_url :signature_id => signatures[0].signature_id
-
+    p "****"
+    p url_request
     @sign_url = url_request.sign_url
   end
 
@@ -71,23 +72,27 @@ class EmbeddedsController < ApplicationController
 
   def unclaimed_draft
     request = client.create_embedded_unclaimed_draft(
-        :test_mode => 1,
+        test_mode: 1,
         # :file_url => 'http://www.pdf995.com/samples/pdf.pdf',
-        :client_id => ENV['CLIENT_ID'],
-        :requester_email_address => ENV['EMAIL'],
-        :type => "request_signature",
-        :signers => [
+        client_id: ENV['CLIENT_ID'],
+        files: ['public/Text_Tags_Merge.pdf'],
+        signers: [
           {
-            :email_address => ENV["EMAIL"],
-            :name => 'Jen',
-            :order => 0
+            'email_address' => ENV["EMAIL"],
+            'name' => 'Jen'
+          },
+          {
+            'email_address' => "jen@test.com",
+            'name' => "Jen Second Signer",
           }
         ],
-        :files => ['public/Text_Tags_Merge.pdf'],
-        :custom_fields => [
-          {"name": "address", "value": "PSYDUCK"}
-        ],
-        :use_text_tags => 1
+        subject: 'Your signature is required',
+        requester_email_address: ENV['EMAIL'],
+        :type => "request_signature",
+        # :custom_fields => [
+        #   {"name": "address", "value": "PSYDUCK"}
+        # ],
+        # :use_text_tags => 1
         # :form_fields_per_document => [
           #   [{
           #     "api_id": "test",
